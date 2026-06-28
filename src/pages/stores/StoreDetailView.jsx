@@ -12,7 +12,7 @@ import Notification from '../../components/common/Notification';
 import NoBackendBanner from '../../components/common/NoBackendBanner';
 import useNotification from '../../hooks/useNotification';
 import { getErrorMessage } from '../../services/api';
-import { getStore, deactivateStore } from '../../services/storesService';
+import { getStore, deactivateStore, getStoreLinkedProducts, getStoreLoanApplications } from '../../services/storesService';
 import './StoreDetailView.css';
 
 const cols = [
@@ -42,12 +42,21 @@ export default function StoreDetailView() {
   const [modal, setModal] = useState(false);
   const [reason, setReason] = useState('');
   const [deactivating, setDeactivating] = useState(false);
+  
+  const [linkedProducts, setLinkedProducts] = useState([]);
+  const [loanApplications, setLoanApplications] = useState([]);
 
   const fetchStore = useCallback(async () => {
     try {
       setLoading(true);
-      const data = await getStore(id);
+      const [data, products, loans] = await Promise.all([
+        getStore(id),
+        getStoreLinkedProducts(id).catch(() => ({ items: [] })),
+        getStoreLoanApplications(id).catch(() => ({ items: [] }))
+      ]);
       setStore(mapStore(data));
+      setLinkedProducts(products.items || []);
+      setLoanApplications(loans.items || []);
     } catch (err) {
       notify.error(getErrorMessage(err, 'Failed to load store.'));
     } finally {
@@ -96,13 +105,38 @@ export default function StoreDetailView() {
           <div className="storedet-kv"><span>Manager</span><strong>{store?.manager}</strong></div>
         </Card>
         <Card title="Linked Products (snapshot)">
-          <div className="storedet-empty">No inventory-snapshot endpoint in the API yet</div>
+          {linkedProducts.length === 0 ? (
+            <div className="storedet-empty">No linked products found</div>
+          ) : (
+            <Table 
+              columns={[
+                { key: 'name', label: 'Product Name' },
+                { key: 'sku', label: 'SKU' },
+                { key: 'stock', label: 'Stock' }
+              ]} 
+              data={linkedProducts.map(p => ({
+                id: p.id,
+                name: p.name || 'Unknown',
+                sku: p.sku || 'N/A',
+                stock: p.stock ?? '0'
+              }))} 
+            />
+          )}
         </Card>
       </div>
 
       <Card title="Loan Applications (last 30/90 days)">
-        <NoBackendBanner module="Store-scoped loan applications" />
-        <Table columns={cols} data={[]} emptyMessage="No loan-application endpoint exists for this view yet" />
+        {loanApplications.length === 0 ? (
+          <div className="storedet-empty">No loan applications found</div>
+        ) : (
+          <Table columns={cols} data={loanApplications.map(app => ({
+            id: app.id,
+            app: app.application_id || app.id || 'N/A',
+            amount: app.amount ? `$${app.amount}` : '—',
+            status: app.status || 'Pending',
+            age: app.age || '—'
+          }))} />
+        )}
       </Card>
 
       <Modal

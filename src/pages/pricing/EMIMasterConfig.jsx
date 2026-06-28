@@ -9,7 +9,7 @@ import Loader from '../../components/common/Loader';
 import Notification from '../../components/common/Notification';
 import useNotification from '../../hooks/useNotification';
 import { getErrorMessage } from '../../services/api';
-import { listEmiTypes, createEmiType } from '../../services/pricingService';
+import { listEmiTypes, createEmiType, toggleEmiType } from '../../services/pricingService';
 import './EMIMasterConfig.css';
 
 // GET /admin/pricing/emi-types response schema isn't documented. The
@@ -28,6 +28,7 @@ function mapEmiType(e) {
     max: e.max_loan_amount != null ? `₹${e.max_loan_amount}` : '—',
     effectiveFrom: e.effective_from ?? null,
     status: isFuture ? 'Scheduled' : 'Active',
+    enabled: e.is_enabled ?? true,
   };
 }
 
@@ -79,6 +80,16 @@ export default function EMIMasterConfig() {
     }
   };
 
+  const handleToggle = async (id, currentEnabled) => {
+    try {
+      await toggleEmiType(id);
+      notify.success(`EMI type ${currentEnabled ? 'disabled' : 'enabled'}.`);
+      fetchEmiTypes();
+    } catch (err) {
+      notify.error(getErrorMessage(err, 'Failed to toggle EMI type.'));
+    }
+  };
+
   return (
     <PageWrapper
       title="EMI Master Configuration"
@@ -94,7 +105,11 @@ export default function EMIMasterConfig() {
                   <strong>{e.type}</strong>
                   <span>{e.min} → {e.max} · {e.kind}</span>
                 </div>
-                <div className="emi-right">
+                <div className="emi-right" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                    <input type="checkbox" checked={e.enabled} onChange={() => handleToggle(e.id, e.enabled)} />
+                    {e.enabled ? 'Enabled' : 'Disabled'}
+                  </label>
                   <Badge variant={e.status === 'Active' ? 'success' : 'warning'}>{e.status}</Badge>
                   {e.effectiveFrom && <span className="emi-eff">from {e.effectiveFrom}</span>}
                 </div>
@@ -105,8 +120,6 @@ export default function EMIMasterConfig() {
         )}
         <p className="emi-note">
           Merchant portals inherit these bounds (override approvals handled in Offer Approval Queue).
-          Note: the backend has no enable/disable toggle for EMI types — status above reflects
-          whether the effective date has passed.
         </p>
       </Card>
 

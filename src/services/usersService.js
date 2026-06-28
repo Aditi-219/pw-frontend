@@ -136,13 +136,13 @@ export async function getRole(id) {
   return data?.data ?? data;
 }
 
-export async function createRole({ name, permissions }) {
-  const { data } = await api.post("/admin/roles", { name, permissions });
+export async function createRole({ name, description, permissions }) {
+  const { data } = await api.post("/admin/roles", { name, description, permissions });
   return data;
 }
 
-export async function renameRole(id, name) {
-  const { data } = await api.put(`/admin/roles/${id}`, { name });
+export async function renameRole(id, name, description) {
+  const { data } = await api.put(`/admin/roles/${id}`, { name, description });
   return data;
 }
 

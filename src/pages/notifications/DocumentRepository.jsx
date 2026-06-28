@@ -5,7 +5,8 @@ import Loader from '../../components/common/Loader';
 import Notification from '../../components/common/Notification';
 import useNotification from '../../hooks/useNotification';
 import { getErrorMessage } from '../../services/api';
-import { listDocuments, getDocumentStats, deleteDocument, shareDocument } from '../../services/complianceService';
+import { listDocuments, getDocumentStats, deleteDocument, shareDocument, uploadDocument } from '../../services/complianceService';
+import { useRef } from 'react';
 import './DocumentRepository.css';
 
 // GET /admin/documents response schema isn't documented. Mapped
@@ -29,6 +30,7 @@ export default function DocumentRepository() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState(null);
+  const fileInputRef = useRef(null);
 
   const fetchAll = useCallback(async () => {
     try {
@@ -77,11 +79,43 @@ export default function DocumentRepository() {
     }
   };
 
+  const handleUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      await uploadDocument(formData);
+      notify.success('Document uploaded successfully.');
+      fetchAll();
+    } catch (err) {
+      notify.error(getErrorMessage(err, 'Failed to upload document.'));
+    } finally {
+      setLoading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
   return (
     <PageWrapper title="Document Repository" subtitle="Centralized document management system">
       <div className="document-repo">
         <div className="repo-header">
-          <button className="upload-btn" disabled title="No upload endpoint in the API — documents arrive via merchant/customer flows">+ Upload Document</button>
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            style={{ display: 'none' }} 
+            onChange={handleUpload} 
+          />
+          <button 
+            className="upload-btn" 
+            onClick={() => fileInputRef.current?.click()}
+            disabled={loading}
+          >
+            + Upload Document
+          </button>
         </div>
 
         <Card>

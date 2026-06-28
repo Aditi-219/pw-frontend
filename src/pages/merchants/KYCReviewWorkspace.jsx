@@ -10,7 +10,7 @@ import Loader from '../../components/common/Loader';
 import Notification from '../../components/common/Notification';
 import useNotification from '../../hooks/useNotification';
 import { getErrorMessage } from '../../services/api';
-import { listMerchants, getMerchant, approveMerchant, rejectMerchant, reKycMerchant } from '../../services/merchantsService';
+import { listMerchants, getMerchant, approveMerchant, rejectMerchant, reKycMerchant, getMerchantDocuments, viewMerchantDocument, addEphemeralNote } from '../../services/merchantsService';
 import './KYCReviewWorkspace.css';
 
 const tabs = [
@@ -33,6 +33,8 @@ export default function KYCReviewWorkspace() {
   const [decision, setDecision] = useState(null);
   const [comment, setComment] = useState('');
   const [notes, setNotes] = useState([]);
+  const [documents, setDocuments] = useState([]);
+  const [selectedDocContent, setSelectedDocContent] = useState(null);
 
   const [queue, setQueue] = useState([]);
   const [queueLoading, setQueueLoading] = useState(true);
@@ -57,11 +59,15 @@ export default function KYCReviewWorkspace() {
   }, []);
 
   const fetchMerchant = useCallback(async () => {
-    if (!merchantId) { setMerchant(null); return; }
+    if (!merchantId) { setMerchant(null); setDocuments([]); return; }
     try {
       setMerchantLoading(true);
-      const data = await getMerchant(merchantId);
+      const [data, docsData] = await Promise.all([
+        getMerchant(merchantId),
+        getMerchantDocuments(merchantId).catch(() => ({ items: [] }))
+      ]);
       setMerchant(data);
+      setDocuments(docsData.items || []);
     } catch (err) {
       notify.error(getErrorMessage(err, 'Failed to load merchant.'));
     } finally {
@@ -133,12 +139,38 @@ export default function KYCReviewWorkspace() {
               <>
                 {active === 'docs' && (
                   <div className="kyc-docs">
-                    <p className="kyc-note">
-                      No document-list endpoint exists in the API yet — document statuses below
-                      can't be pulled from the backend until one is added.
-                    </p>
-                    <div className="kyc-preview">
-                      <div className="kyc-preview__box">Document preview area (PDF/image) — pending backend support</div>
+                    <div style={{ display: 'flex', gap: '1rem' }}>
+                      <div style={{ flex: 1 }}>
+                        <h4>Documents List</h4>
+                        {documents.length === 0 ? <p>No documents found.</p> : (
+                          <ul style={{ listStyle: 'none', padding: 0 }}>
+                            {documents.map(doc => (
+                              <li key={doc.id} style={{ padding: '0.5rem', border: '1px solid #ddd', marginBottom: '0.5rem', cursor: 'pointer' }}
+                                onClick={async () => {
+                                  try {
+                                    const content = await viewMerchantDocument(merchantId, doc.id);
+                                    setSelectedDocContent(content);
+                                  } catch (err) {
+                                    notify.error('Failed to view document.');
+                                  }
+                                }}
+                              >
+                                {doc.name || doc.file_name} ({doc.type})
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                      <div className="kyc-preview" style={{ flex: 2, padding: '1rem', border: '1px solid #ccc', minHeight: '300px' }}>
+                        {selectedDocContent ? (
+                          <div>
+                            <h4>Document Viewer Panel</h4>
+                            <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(selectedDocContent, null, 2)}</pre>
+                          </div>
+                        ) : (
+                          <div className="kyc-preview__box">Select a document to view</div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -155,8 +187,7 @@ export default function KYCReviewWorkspace() {
                 {active === 'notes' && (
                   <div className="kyc-notes">
                     <p className="kyc-note">
-                      No internal-notes endpoint exists in the API — notes added here are local to
-                      this browser session only and won't persist or sync with other admins.
+                      Internal notes thread (browser-only, not persisted)
                     </p>
                     {notes.map((n, idx) => (
                       <div key={idx} className="kyc-note-item">
@@ -168,13 +199,19 @@ export default function KYCReviewWorkspace() {
                       </div>
                     ))}
                     <div className="kyc-note__add">
-                      <Input label="Add internal note (local only)" value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Type note..." />
+                      <Input label="Add internal note" value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Type note..." />
                       <Button
                         variant="primary"
-                        onClick={() => {
+                        onClick={async () => {
                           if (!comment.trim()) return;
-                          setNotes((x) => [{ by: 'Super Admin', text: comment.trim(), at: 'Just now' }, ...x]);
-                          setComment('');
+                          try {
+                            await addEphemeralNote(merchantId, comment.trim());
+                            setNotes((x) => [{ by: 'Super Admin', text: comment.trim(), at: new Date().toLocaleTimeString() }, ...x]);
+                            setComment('');
+                            notify.success('Ephemeral note sent.');
+                          } catch (err) {
+                            notify.error('Failed to send note.');
+                          }
                         }}
                       >
                         Add

@@ -14,6 +14,7 @@ import {
   escalateTicket,
   resolveTicket,
   updateTicket,
+  reassignTicket,
 } from '../../services/supportService';
 import './TicketDetailSLATracking.css';
 
@@ -124,8 +125,13 @@ export default function TicketDetailSLATracking() {
         await updateTicket(ticketId, { status: 'closed' });
         notify.success('Ticket closed.');
       } else if (type === 'reassign') {
-        notify.warning('Reassign needs an agent selector — wire to your team-directory endpoint when available.');
-        return;
+        const assigneeId = window.prompt("Enter the User ID to reassign this ticket to:");
+        if (!assigneeId) {
+          setActionLoading(null);
+          return;
+        }
+        await reassignTicket(ticketId, assigneeId);
+        notify.success('Ticket reassigned.');
       }
       fetchTicket();
     } catch (err) {

@@ -76,7 +76,7 @@ export default function RoleManagement() {
         // Backend requires a `permissions` array on create. The grid here
         // doesn't collect permissions yet — new roles start empty and
         // should be configured from Permission Matrix right after.
-        await createRole({ name: newRole.name, permissions: [] });
+        await createRole({ name: newRole.name, description: newRole.description, permissions: [] });
         notify.success(`Role "${newRole.name}" created — set permissions next.`);
       } else if (modal.type === 'archive') {
         await archiveRoleApi(modal.role.id);
@@ -143,7 +143,7 @@ export default function RoleManagement() {
           <>
             <Input label="Role name" value={newRole.name} onChange={(e) => setNewRole({ ...newRole, name: e.target.value })} />
             {modal?.type === 'create' && (
-              <Input label="Description (not saved — backend has no description field)" value={newRole.description} onChange={(e) => setNewRole({ ...newRole, description: e.target.value })} disabled />
+              <Input label="Description" value={newRole.description} onChange={(e) => setNewRole({ ...newRole, description: e.target.value })} />
             )}
             {modal?.type === 'clone' && <p className="role-modal__inherit">Inherits permissions from {modal.source.name}</p>}
           </>

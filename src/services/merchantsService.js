@@ -125,6 +125,11 @@ export async function addMerchantNote(id, note) {
   return data;
 }
 
+export async function addEphemeralNote(id, note) {
+  const { data } = await api.post(`/admin/merchants/${id}/ephemeral-notes`, { note });
+  return data;
+}
+
 // ---------- Merchant Reactivate (NEW endpoint) ----------
 
 export async function reactivateMerchant(id) {
@@ -144,6 +149,11 @@ export async function approveMerchantChanges(id) {
 export async function getMerchantDocuments(id) {
   const { data } = await api.get(`/admin/merchants/${id}/documents`);
   return normalizeListResponse(data, "documents");
+}
+
+export async function viewMerchantDocument(id, documentId) {
+  const { data } = await api.get(`/admin/merchants/${id}/documents/${documentId}/view`);
+  return data?.data ?? data;
 }
 
 // ---------- Merchant Agreements (NEW endpoints) ----------

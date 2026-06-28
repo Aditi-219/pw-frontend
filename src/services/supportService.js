@@ -62,6 +62,11 @@ export async function resolveTicket(id, { resolutionCategory, resolutionNote, tr
   return data;
 }
 
+export async function reassignTicket(id, assigneeId) {
+  const { data } = await api.post(`/admin/tickets/${id}/reassign`, { assignee_id: assigneeId });
+  return data;
+}
+
 export async function getTicketSla(id) {
   const { data } = await api.get(`/admin/tickets/${id}/sla`);
   return data?.data ?? data;

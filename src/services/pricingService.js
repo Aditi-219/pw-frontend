@@ -53,6 +53,11 @@ export async function deleteEmiType(id) {
   return data;
 }
 
+export async function toggleEmiType(id) {
+  const { data } = await api.post(`/admin/pricing/emi-types/${id}/toggle`);
+  return data;
+}
+
 // ---------- Tenure Slabs ----------
 
 export async function listTenureSlabs(emiTypeId) {

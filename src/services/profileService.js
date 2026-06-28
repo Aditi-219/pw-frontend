@@ -13,14 +13,46 @@ export async function getProfile() {
   return data?.data ?? data?.user ?? data;
 }
 
-/**
- * Backend PUT /admin/profile only accepts { name, mobile } per the spec.
- * Email, timezone, theme, and notification-channel preferences are NOT
- * persisted by this endpoint — the page surfaces this as disabled fields.
- */
-export async function updateProfile({ name, mobile }) {
-  const { data } = await api.put("/admin/profile", { name, mobile });
+export async function updateProfile({ name, email, mobile, timezone, notifications }) {
+  // Using JSON payload
+  const { data } = await api.put("/admin/profile", { 
+    name, email, mobile, timezone, notifications 
+  });
   return data;
+}
+
+export async function uploadProfilePhoto(formData) {
+  const { data } = await api.post("/admin/profile", formData, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
+  return data;
+}
+
+// ---------- MFA ----------
+
+export async function getMfaStatus() {
+  const { data } = await api.get("/admin/profile/mfa");
+  return data?.data ?? data;
+}
+
+export async function setupMfa() {
+  const { data } = await api.post("/admin/profile/mfa/setup");
+  return data?.data ?? data;
+}
+
+export async function confirmMfa(code) {
+  const { data } = await api.post("/admin/profile/mfa/confirm", { code });
+  return data;
+}
+
+export async function useEmailMfa() {
+  const { data } = await api.post("/admin/profile/mfa/use-email");
+  return data;
+}
+
+export async function regenerateRecoveryCodes() {
+  const { data } = await api.post("/admin/profile/recovery-codes/regenerate");
+  return data?.data ?? data;
 }
 
 // ---------- Notifications ----------

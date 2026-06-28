@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import Card from '../../components/common/Card';
 import Table from '../../components/common/Table';
@@ -19,6 +19,7 @@ import {
   bulkToggleFinancingEligibility,
   listCategories,
   detectDuplicateSkus,
+  importProductsCsv,
 } from '../../services/productsService';
 import './MasterProductCatalog.css';
 
@@ -57,6 +58,9 @@ export default function MasterProductCatalog() {
   const [bulkEligible, setBulkEligible] = useState(true);
   const [bulkSaving, setBulkSaving] = useState(false);
   const [detectingSkus, setDetectingSkus] = useState(false);
+  const [importing, setImporting] = useState(false);
+
+  const fileInputRef = useRef(null);
 
   const handleDuplicateSkus = async () => {
     try {
@@ -164,11 +168,35 @@ export default function MasterProductCatalog() {
     }
   };
 
+  const handleImport = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      setImporting(true);
+      await importProductsCsv(file);
+      notify.success('Products imported successfully.');
+      fetchProducts();
+    } catch (err) {
+      notify.error(getErrorMessage(err, 'Failed to import products.'));
+    } finally {
+      setImporting(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
   return (
     <PageWrapper
       title="Master Product Catalog"
       subtitle="Screen 22 — Cross-merchant product oversight, flag, force-delist, eligibility toggles"
-      actions={<Button variant="secondary" onClick={() => setBulkModal(true)}>Bulk eligibility toggle</Button>}
+      actions={
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <input type="file" style={{ display: 'none' }} ref={fileInputRef} onChange={handleImport} accept=".csv" />
+          <Button variant="teal" onClick={() => fileInputRef.current?.click()} loading={importing}>Bulk Import</Button>
+          <Button variant="secondary" onClick={() => setBulkModal(true)}>Bulk eligibility toggle</Button>
+        </div>
+      }
     >
       <Card>
         <div className="prod-toolbar">

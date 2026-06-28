@@ -227,6 +227,15 @@ export async function shareDocument(id, { expiryMinutes = 60, purpose }) {
   return data;
 }
 
+export async function uploadDocument(formData) {
+  const { data } = await api.post("/admin/documents", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
+}
+
 
 /**
  * Compliance module service layer.

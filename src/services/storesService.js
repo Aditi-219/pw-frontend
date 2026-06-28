@@ -35,3 +35,13 @@ export async function exportStoresCsv() {
   const response = await api.get("/admin/stores/export", { responseType: "blob" });
   return response.data;
 }
+
+export async function getStoreLinkedProducts(id) {
+  const { data } = await api.get(`/admin/stores/${id}/linked-products`);
+  return normalizeListResponse(data, "products");
+}
+
+export async function getStoreLoanApplications(id) {
+  const { data } = await api.get(`/admin/stores/${id}/loan-applications`);
+  return normalizeListResponse(data, "applications");
+}
