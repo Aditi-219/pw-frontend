@@ -1,0 +1,29 @@
+.cbm-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 900px) { .cbm-grid { grid-template-columns: 1fr; } }
+
+.cbm-row { display: flex; gap: 0.75rem; align-items: flex-end; margin-bottom: 1rem; }
+.cbm-row .input-group { flex: 1; }
+
+.cbm-tree { display: flex; flex-direction: column; gap: 0.75rem; }
+.cbm-node { padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-white); }
+.cbm-node span { display: block; margin-top: 0.25rem; color: var(--color-text-muted); font-size: 0.85rem; }
+
+.cbm-rules { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+.cbm-rules h4 { margin: 0 0 0.5rem 0; color: var(--color-navy); }
+.cbm-rule { display: flex; justify-content: space-between; padding: 0.45rem 0; color: var(--color-text-muted); }
+.cbm-rule strong { color: var(--color-text); }
+.cbm-node {
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  margin-bottom: 0.5rem;
+  transition: var(--transition);
+}
+.cbm-node:hover { background: var(--color-bg-hover); }
+.cbm-node--active { border-color: var(--color-primary); box-shadow: 0 0 0 1px var(--color-primary); }
+.cbm-empty { color: var(--color-text-muted); font-size: 0.85rem; padding: 0.5rem 0; }
+
+.cbm-import-export { display:flex;gap:.4rem;margin-bottom:.5rem; }

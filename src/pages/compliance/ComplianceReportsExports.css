@@ -1,0 +1,184 @@
+.compliance-reports {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.report-generator {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.generator-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.report-select, .date-select, .format-select {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.generate-btn {
+  padding: 0.6rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.report-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.3rem 0.8rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.reports-table {
+  margin-bottom: 2rem;
+}
+
+.report-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.report-row:hover {
+  background: var(--color-bg-hover);
+}
+
+.report-info {
+  flex: 2;
+}
+
+.report-name {
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.report-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.report-status {
+  flex: 1;
+}
+
+.status-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.status-ready {
+  background: #E6F7F7;
+  color: #00B4B8;
+}
+
+.status-processing {
+  background: #FEF4E6;
+  color: #F5A623;
+}
+
+.report-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.download-btn, .share-btn {
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.download-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+}
+
+.share-btn {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.processing-text {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.schedule-section {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.schedule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+}
+
+.schedule-name {
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.schedule-cron {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.edit-schedule-btn {
+  padding: 0.3rem 0.8rem;
+  background: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.compliance-note { font-size: 0.78rem; color: var(--color-text-muted); margin: 0.5rem 0 0; }
+.compliance-empty { color: var(--color-text-muted); padding: 1rem 0; }

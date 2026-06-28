@@ -1,0 +1,19 @@
+.user-dir__filters {
+  display: flex; flex-wrap: wrap;
+  gap: 1rem; margin-bottom: 1.25rem;
+  align-items: center; justify-content: flex-start;
+}
+.user-dir__filters .search-bar { flex: 1; min-width: 220px; }
+.user-dir__filters select {
+  padding: 0.65rem 0.85rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-navy);
+  font-size: 0.875rem;
+}
+.user-dir__reason {
+  width: 100%; margin-top: 0.75rem; padding: 0.65rem;
+  background: var(--color-white); border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); color: var(--color-navy); text-align: left;
+}

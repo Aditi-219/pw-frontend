@@ -1,0 +1,16 @@
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  justify-items: stretch;
+}
+.role-card__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; text-align: left; }
+.role-card__head h3 { color: var(--color-navy); font-size: 1rem; margin: 0; text-align: left; }
+.role-card__desc { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.75rem; text-align: left; }
+.role-card__meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--color-text-muted); margin-bottom: 1rem; }
+.role-card__actions { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-start; }
+.role-modal__inherit { font-size: 0.8rem; color: var(--color-teal); margin-top: 0.75rem; text-align: left; }
+.roles-empty {
+  color: var(--color-text-muted);
+  padding: 1rem 0;
+}

@@ -1,0 +1,240 @@
+/* MasterDashboard.css */
+.master-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.md-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.md-kpi-grid > * {
+  min-width: 0;
+}
+
+.md-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  width: 100%;
+}
+
+.md-main-grid > * {
+  min-width: 0;
+}
+
+.md-trend-card .card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.md-trend-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.md-trend-toggle__btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.md-trend-toggle__btn--active {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+/* Action tray */
+.md-action-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.md-action-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  background: var(--color-bg-hover);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.md-action-item:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-white);
+}
+
+.md-action-item__label {
+  flex: 1;
+  font-size: 0.825rem;
+  color: var(--color-navy);
+  font-weight: 500;
+}
+
+.md-action-item__arrow {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Live stream */
+.md-stream-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.md-stream-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-hover);
+}
+
+.md-stream-row__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.md-stream-row__id {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.md-stream-row__merchant {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.md-stream-row__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.md-stream-row__amount {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.md-stream-row__time {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* Signups */
+.md-signup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.md-signup-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.md-signup-row:last-child {
+  border-bottom: none;
+}
+
+.md-signup-row__avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-teal);
+  color: var(--color-white);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.md-signup-row__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.md-signup-row__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.md-signup-row__region {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.md-signup-row__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.md-signup-row__time {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .md-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .md-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .md-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.md-empty {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  padding: 0.75rem 0;
+  margin: 0;
+}

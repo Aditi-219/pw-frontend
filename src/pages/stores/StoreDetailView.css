@@ -1,0 +1,10 @@
+.storedet-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 900px) { .storedet-grid { grid-template-columns: 1fr; } }
+.storedet-kv { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); }
+.storedet-kv:last-child { border-bottom: none; }
+.storedet-kv span { color: var(--color-text-muted); }
+.storedet-empty {
+  height: 160px; border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md); background: var(--color-bg-hover);
+  display: flex; align-items: center; justify-content: center; color: var(--color-text-muted);
+}

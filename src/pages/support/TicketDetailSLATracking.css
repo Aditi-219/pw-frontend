@@ -1,0 +1,249 @@
+.ticket-detail {
+  width: 100%;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ticket-id {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.ticket-subject {
+  font-size: 1.25rem;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.ticket-badges {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.priority-badge, .status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.priority-high {
+  background: #FEF4E6;
+  color: #F5A623;
+}
+
+.status-open {
+  background: #FEF4E6;
+  color: #F5A623;
+}
+
+.ticket-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+}
+
+.info-item .label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.info-item .value {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.ticket-description {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+}
+
+.ticket-description h4 {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.ticket-description p {
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.comments-section h4 {
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.comments-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.comment {
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.comment.internal {
+  background: #F0EEFB;
+}
+
+.comment.system {
+  background: #FEF4E6;
+}
+
+.comment.customer {
+  background: #E6F7F7;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.comment-user {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.comment-time {
+  color: var(--color-text-muted);
+}
+
+.comment-message {
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+.add-comment {
+  margin-top: 1rem;
+}
+
+.add-comment textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+}
+
+.add-comment-btn {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.sla-timer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+}
+
+.sla-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.sla-time {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.sla-target {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.sla-progress {
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.action-btn.escalate {
+  background: #FEF4E6;
+  border: 1px solid #F5A623;
+  color: #F5A623;
+}
+
+.action-btn.reassign {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.action-btn.resolve {
+  background: var(--color-primary);
+  border: none;
+  color: white;
+}
+
+.action-btn.close {
+  background: transparent;
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+}
+.ticket-picker-label { display: block; font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.4rem; }
+.ticket-picker { width: 100%; max-width: 420px; }
+.ticket-detail-empty { color: var(--color-text-muted); padding: 1rem 0; }

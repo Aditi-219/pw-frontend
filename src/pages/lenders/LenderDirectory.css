@@ -1,0 +1,9 @@
+.lenders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.lender-card__head { display: flex; justify-content: space-between; align-items: center; }
+.lender-card__head h3 { margin: 0; color: var(--color-navy); font-size: 1rem; }
+.lender-card__meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 0.75rem; }
+.lender-card__meta span { color: var(--color-text-muted); font-size: 0.75rem; display: block; }
+.lender-card__meta strong { color: var(--color-text); }
+.lender-card__actions { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-top: 1rem; }
+.lender-toggle { display: flex; gap: 0.5rem; align-items: center; color: var(--color-text-muted); font-size: 0.85rem; }
+.lenders-empty { color: var(--color-text-muted); padding: 1rem 0; }

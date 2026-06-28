@@ -1,0 +1,41 @@
+.perm-toolbar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1rem; justify-content: flex-start; }
+.perm-toolbar select {
+  padding: 0.5rem 0.85rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-navy);
+}
+.perm-conditional { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--color-text-muted); }
+.perm-conditional-note {
+  font-size: 0.8rem; color: var(--color-navy);
+  padding: 0.75rem;
+  background: rgba(245, 166, 35, 0.15);
+  border-left: 4px solid var(--color-yellow);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.perm-matrix-wrap { overflow-x: auto; }
+.perm-matrix { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; }
+.perm-matrix th,
+.perm-matrix td {
+  padding: 0.65rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+.perm-matrix th {
+  background: var(--color-bg-hover);
+  color: var(--color-navy);
+  font-weight: 600;
+}
+.perm-row-toggle,
+.perm-col-toggle {
+  background: none; border: none;
+  color: var(--color-teal);
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+}
+.perm-cell--diff { background: rgba(123, 111, 214, 0.12); }
+.perm-matrix input[type="checkbox"] { accent-color: var(--color-teal); }

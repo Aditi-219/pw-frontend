@@ -1,0 +1,22 @@
+.storemap-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1rem; }
+@media (max-width: 1024px) { .storemap-grid { grid-template-columns: 1fr; } }
+.storemap-map {
+  height: 420px;
+  background: var(--color-bg-hover);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+.storemap-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.storemap-item {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 0.75rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); background: var(--color-white);
+  cursor: pointer;
+}
+.storemap-item__left span { display: block; margin-top: 0.25rem; font-size: 0.8rem; color: var(--color-text-muted); }
+.storemap-item:hover { background: var(--color-bg-hover); }
+.storemap-empty { color: var(--color-text-muted); padding: 0.75rem 0; }

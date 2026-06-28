@@ -1,0 +1,33 @@
+.merchant-dir__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.merchant-dir__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+.merchant-dir__tab {
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.merchant-dir__tab--active {
+  background: var(--color-teal);
+  border-color: var(--color-teal);
+  color: var(--color-white);
+}
+
+.merchant-dir__modal-text {
+  margin: 0 0 0.75rem 0;
+  color: var(--color-text-muted);
+}

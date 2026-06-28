@@ -1,0 +1,17 @@
+.lcfg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 900px) { .lcfg-grid { grid-template-columns: 1fr; } }
+.lcfg-field label { display: block; font-weight: 700; color: var(--color-navy); margin: 0 0 0.35rem 0; font-size: 0.8rem; }
+.lcfg-field select {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-navy);
+}
+.lcfg-actions { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+.lcfg-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,8 @@
+.prod-toolbar { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.prod-toolbar .search-bar { flex: 1; min-width: 220px; }
+.prod-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.prod-hint { margin: 0 0 0.75rem 0; color: var(--color-text-muted); }
+.prod-bulk-field { margin: 0.75rem 0; }
+.prod-bulk-field label { display: block; font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.4rem; }
+.prod-bulk-field select { width: 100%; }
+.prod-bulk-check { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; }

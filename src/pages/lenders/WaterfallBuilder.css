@@ -1,0 +1,32 @@
+.wf-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.wf-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.75rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); background: var(--color-white);
+}
+.wf-rank {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--color-teal); color: var(--color-white);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+.wf-name { flex: 1; font-weight: 700; color: var(--color-navy); }
+.wf-actions { display: flex; gap: 0.5rem; }
+.wf-sim { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+.wf-sim h4 { margin: 0 0 0.5rem 0; color: var(--color-navy); }
+.wf-text {
+  width: 100%; margin-bottom: 0.75rem;
+  padding: 0.75rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); background: var(--color-white);
+  color: var(--color-navy); resize: vertical;
+}
+.wf-empty { color: var(--color-text-muted); padding: 0.75rem 0; }
+.wf-sim-result {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  overflow-x: auto;
+}

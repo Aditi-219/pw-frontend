@@ -1,0 +1,15 @@
+.vlog-toolbar { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.vlog-toolbar .search-bar { flex: 1; min-width: 220px; }
+.vlog-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.vlog-json {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  background: var(--color-bg-hover);
+  margin-bottom: 0.75rem;
+}
+.vlog-json__title { font-weight: 700; color: var(--color-navy); margin-bottom: 0.5rem; }
+.vlog-json pre { margin: 0; font-size: 0.8rem; color: var(--color-text-muted); white-space: pre-wrap; }
+.vlog-picker { margin-bottom: 1rem; }
+.vlog-picker label { display: block; font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.4rem; }
+.vlog-picker select { width: 100%; max-width: 360px; }

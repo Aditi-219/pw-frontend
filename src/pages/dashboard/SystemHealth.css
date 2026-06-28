@@ -1,0 +1,234 @@
+/* SystemHealth.css */
+.system-health {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sh-banner {
+  background: var(--color-yellow);
+  color: var(--color-navy);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+}
+
+.sh-service-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.sh-service-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-hover);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sh-service-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sh-service-card__name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.sh-service-card__metrics {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sh-metric-label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+}
+
+.sh-metric-value {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.sh-grid-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+/* Queue list */
+.sh-queue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sh-queue-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-hover);
+}
+
+.sh-queue-row__name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  font-family: monospace;
+}
+
+.sh-queue-row__stats {
+  display: flex;
+  gap: 0.85rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.sh-queue-failed {
+  color: var(--color-danger);
+}
+
+/* Integration list */
+.sh-integration-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.sh-integration-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sh-integration-row:last-child {
+  border-bottom: none;
+}
+
+.sh-integration-row__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.sh-integration-row__right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.sh-integration-row__time {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* Error feed */
+.sh-error-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.sh-error-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-border-strong);
+  background: var(--color-bg-hover);
+}
+
+.sh-error-row--error {
+  border-left-color: var(--color-danger);
+}
+
+.sh-error-row--warning {
+  border-left-color: var(--color-warning);
+}
+
+.sh-error-row__main {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.sh-error-row__service {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.sh-error-row__message {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.sh-error-row__time {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.sh-banner-input {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-navy);
+  resize: vertical;
+}
+
+.sh-banner-input:focus {
+  outline: none;
+  border-color: var(--color-teal);
+  box-shadow: 0 0 0 3px rgba(0, 180, 184, 0.12);
+}
+
+@media (max-width: 1100px) {
+  .sh-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sh-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .sh-service-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sh-empty {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  padding: 0.5rem 0;
+  margin: 0;
+}

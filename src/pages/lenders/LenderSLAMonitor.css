@@ -1,0 +1,15 @@
+.sla-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+@media (max-width: 1200px) { .sla-kpis { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .sla-kpis { grid-template-columns: 1fr; } }
+
+.sla-charts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 1024px) { .sla-charts { grid-template-columns: 1fr; } }
+.sla-gap-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+.sla-empty {
+  color: var(--color-text-muted);
+  padding: 1rem 0;
+}
